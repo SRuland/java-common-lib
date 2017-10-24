@@ -16,10 +16,8 @@ matrix:
     - env: NAME='Build with ECJ'
       script:
         - ant build-project-ecj
-    - env: NAME='Unit Tests'
-      script:
-        - ant unit-tests-coverage
     - env: NAME='Create Javadoc'
+      jdk: oraclejdk9
       script:
         - ant javadoc
     - env: NAME=Checkstyle
@@ -31,6 +29,10 @@ matrix:
     - env: NAME='Check source-code format'
       script:
         - ant format-source && git diff -s --exit-code
+env:
+  - NAME='Unit Tests'
+script:
+  - ant unit-tests-coverage
 deploy:
   - skip_cleanup: true
     provider: script
